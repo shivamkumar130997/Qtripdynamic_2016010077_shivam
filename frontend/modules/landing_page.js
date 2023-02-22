@@ -12,8 +12,17 @@ async function init() {
 
 //Implementation of fetch call
 async function fetchCities() {
-  // TODO: MODULE_CITIES
-  // 1. Fetch cities using the Backend API and return the data
+  try {
+    const response = await fetch(
+      `http://13.232.210.217:8082/cities`
+    );
+    const json = await response.json();
+    
+    return json;
+  } catch(err) {
+    return null; // TypeError: failed to fetch
+  }
+    
 
 }
 
@@ -22,6 +31,20 @@ function addCityToDOM(id, city, description, image) {
   // TODO: MODULE_CITIES
   // 1. Populate the City details and insert those details into the DOM
 
+
+  let container= document.createElement("div");
+  container.className="col-4";
+  let InnerHtml=`<div class="card" style="width: 15rem;">
+  <img src=${image} class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${city}</h5>
+    <a id=${id} class="btn btn-primary">${description}</a>
+  </div>
+</div>`;
+container.innerHTML=InnerHtml
+    document.getElementById("data").append(container);
+ 
+ 
 }
 
 export { init, fetchCities, addCityToDOM };
