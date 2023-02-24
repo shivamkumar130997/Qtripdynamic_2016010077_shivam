@@ -36,7 +36,7 @@ function addAdventureToDOM(adventures) {
   container.className="col-4 flex";
   let InnerHtml=`
   <div class="activity-card" >
-  <a  class="badge badge-warning" style="color: blue;">${element.category}</a>
+  <p  class="badge badge-warning" style="color: blue;">${element.category}</p>
     <img class="activity-card img" src=${element.image} alt="Card image cap"></img>
   <div class="card-body">
    
