@@ -5,21 +5,53 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-
+  
+const params = new URLSearchParams(search);
+const city=params.get('city') 
+return city;
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try {
+    const response = await fetch(
+      `http://3.6.48.71:8082/adventures?city=`+city
+    );
+    const json = await response.json();
+    
+    return json;
+  } catch(err) {
+    return null; // TypeError: failed to fetch
+  }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  adventures.forEach((element) => {
+  let container= document.createElement("div");
+  container.className="col-4 flex";
+  let InnerHtml=`
+  <div class="activity-card" >
+  <a  class="badge badge-warning" style="color: blue;">${element.category}</a>
+    <img class="activity-card img" src=${element.image} alt="Card image cap"></img>
+  <div class="card-body">
+   
+    <p>${element.name}</p>
+    <p>${element.costPerHead}</p>
+    <br/>
+    <p>Duration</p>
+    <p>${element.duration}</p>
+  </div>
+</div>`
 
+container.innerHTML=InnerHtml
+document.getElementById("data").append(container);
+  });
+    
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.

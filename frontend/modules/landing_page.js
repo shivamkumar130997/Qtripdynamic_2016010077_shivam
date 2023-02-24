@@ -14,7 +14,7 @@ async function init() {
 async function fetchCities() {
   try {
     const response = await fetch(
-      `http://13.232.210.217:8082/cities`
+      `http://3.6.48.71:8082/cities`
     );
     const json = await response.json();
     
@@ -38,7 +38,7 @@ function addCityToDOM(id, city, description, image) {
   <img src=${image} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${city}</h5>
-    <a id=${id} class="btn btn-primary">${description}</a>
+    <a href="pages/adventures/?city=${id}" id="${id}" class="btn btn-primary">${description}</a>
   </div>
 </div>`;
 container.innerHTML=InnerHtml
