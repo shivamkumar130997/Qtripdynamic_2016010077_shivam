@@ -17,7 +17,7 @@ async function fetchAdventures(city) {
   // 1. Fetch adventures using the Backend API and return the data
   try {
     const response = await fetch(
-      `http://3.6.48.71:8082/adventures?city=`+city
+      config.backendEndpoint + `/adventures?city=${city}`
     );
     const json = await response.json();
     
@@ -31,26 +31,49 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-  adventures.forEach((element) => {
-  let container= document.createElement("div");
-  container.className="col-4 flex";
-  let InnerHtml=`
-  <div class="activity-card" >
-  <p  class="badge badge-warning" style="color: blue;">${element.category}</p>
-    <img class="activity-card img" src=${element.image} alt="Card image cap"></img>
-  <div class="card-body">
+//   adventures.forEach((element) => {
+//   let container= document.createElement("a");
+//   container.className="col-4 flex";
+//   container.id=element.id;
+//   let InnerHtml=`
+//   <div class="activity-card" >
+//   <a  class="badge badge-warning" style="color: blue;">${element.category}</a>
+//     <img class="activity-card img" src=${element.image} alt="Card image cap"></img>
+//   <div class="card-body">
    
-    <p>${element.name}</p>
-    <p>${element.costPerHead}</p>
-    <br/>
-    <p>Duration</p>
-    <p>${element.duration}</p>
-  </div>
-</div>`
+//     <p >${element.name}</p>
+//     <p>${element.costPerHead}</p>
+//     <br/>
+//     <p>Duration</p>
+//     <p>${element.duration}</p>
+//   </div>
+// </div>`
 
-container.innerHTML=InnerHtml
-document.getElementById("data").append(container);
-  });
+// container.innerHTML=InnerHtml
+// document.getElementById("data").append(container);
+//   });
+adventures.forEach((adv) => {
+  let divColEle = document.createElement('div');
+  divColEle.className = 'col-6 col-lg-3 mb-3';
+  divColEle.innerHTML = `
+  <a href="detail/?adventure=${adv.id}" id="${adv.id}"> 
+    <div class="card">
+      <img src="${adv.image}" class="activity-card img"/>
+      <div class="category-banner">${adv.category}</div>
+      <div class="card-body d-md-flex justify-content-between">
+        <h5>${adv.name}</h5>
+        <p>₹${adv.costPerHead}</p>
+      </div>
+      <div class="card-body d-md-flex justify-content-between"> 
+        <h5>Duration</h5>
+        <p>${adv.duration} Hours</p>
+      </div>
+    </div>
+  </a>`;
+
+  let divRowEle = document.getElementById('data');
+  divRowEle.append(divColEle);
+});
     
 }
 
