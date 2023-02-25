@@ -14,7 +14,7 @@ async function init() {
 async function fetchCities() {
   try {
     const response = await fetch(
-      `http://3.6.48.71:8082/cities`
+      config.backendEndpoint +`/cities`
     );
     const json = await response.json();
     

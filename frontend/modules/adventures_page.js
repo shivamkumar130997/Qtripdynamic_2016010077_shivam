@@ -81,14 +81,27 @@ adventures.forEach((adv) => {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-
+  let bigCities = [];
+  for (let i = 0; i < list.length; i++) {
+      if (list[i].duration >= low && list[i].duration <= high ) {
+          bigCities.push(list[i]);
+      }
+  }
+  return bigCities;
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
-
+  let bigCities = [];
+  for (let i = 0; i < list.length; i++) {
+    for(let j=0;j<categoryList.length;j++){
+      if (list[i].category == categoryList[j]) {
+          bigCities.push(list[i]);
+      }}
+  }
+  return bigCities;
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -102,17 +115,47 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
-
+let filterfunctionss=[];
+  if((filters.duration)!="" && (filters.category).length>0){
+    debugger;
+    const durationfil= filters.duration;
+    const Catogoryfil=filters.category;
+    filterfunctionss=filterByCategory(list,filters.category);
+    const myArray = (filters.duration).split("-");
+    const low=myArray[0];
+    const high=myArray[1];
+    filterfunctionss=filterByDuration(filterfunctionss,low,high);
+}else if((filters.duration)=="" && (filters.category).length>0){
+  
+  const durationfil= filters.duration;
+    const Catogoryfil=filters.category;
+    filterfunctionss=filterByCategory(list,filters.category);
+}
+else if((filters.duration)!="" && (filters.category).length==0){
+ 
+  
+    const myArray = (filters.duration).split("-");
+    const low=myArray[0];
+    const high=myArray[1];
+    filterfunctionss=filterByDuration(list,low,high);
+}
+else{
+  
+ 
+  filterfunctionss=list;
+ 
+}
 
   // Place holder for functionality to work in the Stubs
-  return list;
+  return filterfunctionss;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
 function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to localStorage
-
+  const jsonvalue=JSON.stringify(filters);
+  localStorage.setItem("filters",jsonvalue);
   return true;
 }
 
@@ -121,9 +164,9 @@ function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
 
-
+const jsonresult=JSON.parse(localStorage.getItem("filters"));
   // Place holder for functionality to work in the Stubs
-  return null;
+  return jsonresult;
 }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
@@ -133,6 +176,17 @@ function getFiltersFromLocalStorage() {
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
+ 
+ (filters.category).forEach((Element)=>{
+  let divColEle = document.createElement('div');
+  divColEle.className = 'category-filter';
+  divColEle.innerHTML = `
+
+  <span class="  ">${Element}</span>`
+;
+let divRowEle = document.getElementById('category-list');
+divRowEle.append(divColEle);
+});
 
 }
 export {
