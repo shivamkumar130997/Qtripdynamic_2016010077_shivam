@@ -59,27 +59,30 @@ adventures.forEach((adv) => {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-  let bigCities = [];
-  for (let i = 0; i < list.length; i++) {
-      if (list[i].duration >= low && list[i].duration <= high ) {
-          bigCities.push(list[i]);
-      }
-  }
-  return bigCities;
+  // let bigCities = [];
+  // for (let i = 0; i < list.length; i++) {
+  //     if (list[i].duration >= low && list[i].duration <= high ) {
+  //         bigCities.push(list[i]);
+  //     }
+  // }
+  // return bigCities;
+
+  return list.filter(adventure=>adventure.duration>low && adventure.duration<=high)
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
-  let bigCities = [];
-  for (let i = 0; i < list.length; i++) {
-    for(let j=0;j<categoryList.length;j++){
-      if (list[i].category == categoryList[j]) {
-          bigCities.push(list[i]);
-      }}
-  }
-  return bigCities;
+  // let bigCities = [];
+  // for (let i = 0; i < list.length; i++) {
+  //   for(let j=0;j<categoryList.length;j++){
+  //     if (list[i].category == categoryList[j]) {
+  //         bigCities.push(list[i]);
+  //     }}
+  // }
+  // return bigCities;
+  return list.filter(adventure=>categoryList.includes(adventure.category));
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
