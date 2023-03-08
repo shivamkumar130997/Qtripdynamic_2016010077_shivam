@@ -29,29 +29,7 @@ async function fetchAdventures(city) {
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
-  // TODO: MODULE_ADVENTURES
-  // 1. Populate the Adventure Cards and insert those details into the DOM
-//   adventures.forEach((element) => {
-//   let container= document.createElement("a");
-//   container.className="col-4 flex";
-//   container.id=element.id;
-//   let InnerHtml=`
-//   <div class="activity-card" >
-//   <a  class="badge badge-warning" style="color: blue;">${element.category}</a>
-//     <img class="activity-card img" src=${element.image} alt="Card image cap"></img>
-//   <div class="card-body">
-   
-//     <p >${element.name}</p>
-//     <p>${element.costPerHead}</p>
-//     <br/>
-//     <p>Duration</p>
-//     <p>${element.duration}</p>
-//   </div>
-// </div>`
 
-// container.innerHTML=InnerHtml
-// document.getElementById("data").append(container);
-//   });
 adventures.forEach((adv) => {
   let divColEle = document.createElement('div');
   divColEle.className = 'col-6 col-lg-3 mb-3';
